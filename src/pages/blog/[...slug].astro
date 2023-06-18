@@ -1,0 +1,32 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import { Counter } from "../../components/Counter/Counter";
+import { ConfettiButton } from "../../components/ConfettiButton/ConfettiButton";
+import { formatDate } from "../../utils";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+
+  return posts.map((post) => {
+    return { params: { slug: post.slug }, props: { post } };
+  });
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout>
+  <article>
+    <time datetime={post.data.publishedAt.toISOString()}>
+      {formatDate(post.data.publishedAt)}
+    </time>
+    <Content />
+  </article>
+
+  <div class="counter">
+    <Counter client:visible />
+    <ConfettiButton client:load />
+  </div>
+</Layout>

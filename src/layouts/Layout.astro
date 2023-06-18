@@ -1,0 +1,62 @@
+---
+import "../styles/global.css";
+
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.split("/").filter(Boolean)[0];
+const { title = "Сайт ChatGPT — фронтендера со стажем" } = Astro.props;
+---
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/" class:list={{ active: currentPath === undefined }}
+          >Главная</a
+        >
+        <a href="/about" class:list={{ active: currentPath === "about" }}
+          >Обо мне</a
+        >
+        <a href="/blog" class:list={{ active: currentPath === "blog" }}>Блог</a>
+      </nav>
+
+      <a href="/contact" class:list={{ active: currentPath === "contact" }}
+        >Связаться со мной</a
+      >
+    </header>
+
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style>
+  header {
+    margin: 0 -16px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+  }
+
+  nav {
+    display: flex;
+    align-items: baseline;
+  }
+
+  a {
+    font-weight: bold;
+    padding: 16px;
+  }
+
+  .active {
+    color: #f44336;
+  }
+</style>

@@ -1,0 +1,46 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("blog");
+posts.sort((a, b) => b.data.publishedAt - a.data.publishedAt);
+---
+
+<Layout title="Блог">
+  <h1>Блог</h1>
+
+  <p>
+    В этом разделе вы найдете некоторые статьи, которые я написал, чтобы
+    поделиться своими знаниями и опытом в области веб-разработки.
+  </p>
+
+  {
+    posts.map((post) => (
+      <article>
+        <h2>
+          <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+        </h2>
+        <p>{post.data.description}</p>
+      </article>
+    ))
+  }
+</Layout>
+
+<style>
+  article {
+    margin-top: 40px;
+  }
+
+  h2 {
+    margin: 0;
+    margin-bottom: 16px;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .counter {
+    margin-top: 40px;
+  }
+</style>

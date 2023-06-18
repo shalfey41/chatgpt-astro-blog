@@ -1,0 +1,129 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+    <h1>Напишите, и я вам отвечу!</h1>
+
+    <div class:list={["card", { visible: !!message }]}>
+        <p set:html={message} />
+        <a href="/contact">Отправить еще одно сообщение</a>
+    </div>
+
+    <div class:list={["form-container", { visible: !message }]}>
+        <form method="post" action="/contact" class="form">
+            <label for="email">Email</label>
+            <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Почта"
+                    required
+            />
+
+            <label for="text">Сообщение</label>
+            <textarea
+                    id="text"
+                    name="text"
+                    placeholder="Привет, я бы хотел, чтобы ты сделал мне сайт"
+                    rows="5"
+                    required></textarea>
+
+            <button class="button">Отправить</button>
+        </form>
+    </div>
+</Layout>
+
+<style>
+    h1 {
+        margin-bottom: 32px;
+    }
+
+    .card {
+        padding: 20px;
+        width: 400px;
+        border: 10px solid #4d71ff;
+        border-radius: 20px;
+        display: none;
+    }
+
+    .card p {
+        margin: 0 0 8px;
+    }
+
+    .form-container {
+        display: none;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+        font-size: 16px;
+    }
+
+    input,
+    textarea {
+        font-family: inherit;
+        font-size: inherit;
+        margin-bottom: 16px;
+        margin-top: 4px;
+        padding: 8px;
+    }
+
+    .visible {
+        display: block;
+    }
+
+    .button {
+        align-items: center;
+        background-color: #00ceff;
+        border: 2px solid #111;
+        border-radius: 8px;
+        box-sizing: border-box;
+        color: #111;
+        cursor: pointer;
+        display: flex;
+        font-family: inherit;
+        font-size: 16px;
+        height: 48px;
+        justify-content: center;
+        line-height: 24px;
+        max-width: 100%;
+        padding: 0 40px;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+
+    .button:after {
+        background-color: #111;
+        border-radius: 8px;
+        content: "";
+        display: block;
+        height: 48px;
+        left: 0;
+        width: 100%;
+        position: absolute;
+        top: -2px;
+        transform: translate(8px, 8px);
+        transition: transform 0.2s ease-out;
+        z-index: -1;
+    }
+
+    .button:hover:after {
+        transform: translate(0, 0);
+    }
+
+    .button:active {
+        background-color: #ffdeda;
+        outline: 0;
+    }
+
+    .button:hover {
+        outline: 0;
+    }
+</style>

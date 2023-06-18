@@ -1,0 +1,24 @@
+body {
+    font-size: 18px;
+    line-height: 1.5;
+    font-family: Navigo, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+    max-width: 730px;
+    margin: 0 auto;
+}
+
+h1, h2, h3 {
+    line-height: 1.25;
+}
+
+main {
+    padding-bottom: 100px;
+}
+
+a {
+    color: #2196f3;
+}
+
+a:hover,
+a:focus {
+    color: #f44336;
+}

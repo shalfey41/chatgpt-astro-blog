@@ -1,0 +1,21 @@
+header {
+    margin: 0 -16px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+}
+
+nav {
+    display: flex;
+    align-items: baseline;
+}
+
+a {
+    font-weight: bold;
+    padding: 16px;
+}
+
+.active {
+    color: #f44336;
+}
